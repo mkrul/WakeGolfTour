@@ -19,3 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
+
+admin.site.site_header = 'Wake Golf Tour'
+admin.site.index_title = 'WGT Site Administration'
+
