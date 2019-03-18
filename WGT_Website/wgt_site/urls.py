@@ -20,7 +20,7 @@ from golf_course import urls as golf_course_urls
 from . views import homepage
 
 urlpatterns = [
-    url('', homepage),
+    url(r'^$', homepage),
     url(r'^admin/', admin.site.urls),
     url('golf_course/', include(golf_course_urls)),
 ]
