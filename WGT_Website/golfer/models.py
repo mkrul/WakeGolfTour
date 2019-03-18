@@ -1,6 +1,7 @@
 from django.db import models
 from tournament.models import Tournament, Round
 from golf_course.models import GolfCourse
+from operator import itemgetter
 
 class Golfer(models.Model):
     golfer_id = models.IntegerField(primary_key=True)
@@ -29,6 +30,12 @@ class TournGolfer(models.Model):
     def __str__(self):
         return "{} {}".format (self.tg_tourn.tourn_name,
                                self.tg_golfer.golfer_name)
+
+    def getGolferName(self):
+        return self.tg_golfer.golfer_name
+
+    def getTournName(self):
+        return self.tg_tourn.tourn_name
 
 
 class GolferRoundScores(models.Model):
@@ -65,3 +72,51 @@ class GolferRoundScores(models.Model):
         return "{} {} {} {}".format (self.grs_tourn_golfer.tg_golfer,
                                      self.grs_tourn_golfer.tg_tourn,
                                      self.grs_round, self.grs_total_score)
+
+    def getTournScores(tourn_id):
+        tournament_scores = list()
+        tourn_golfers = TournGolfer.objects.filter(tg_tourn = tourn_id)
+
+        for tourn_golfer in tourn_golfers:
+            total_score = 0
+            gts = dict()
+            gts["golfer_name"] = tourn_golfer.getGolferName()
+            gts["tournament_name"] = tourn_golfer.getTournName()
+            gts["tourn_golfer_id"] = tourn_golfer.tg_id
+            scores = GolferRoundScores.objects.filter(
+                grs_tourn_golfer = tourn_golfer,
+                ).order_by('grs_round')
+
+            for i in range(1, len(scores) +1):
+                round_score = scores[i-1].grs_total_score
+                gts["round{}_score".format(i)] = round_score
+                total_score = total_score + round_score
+
+            gts["total_score"] = total_score
+            tournament_scores.append(gts)
+
+        return sorted
+
+    def getTournScoresByGolfer(golfer_id):
+        tournament_scores = list()
+        tourn_golfers = TournGolfer.objects.filter(tg_tourn = golfer_id)
+
+        for tourn_golfer in tourn_golfers:
+            total_score = 0 
+            gts = dict()
+            gts["golfer_name"] = tourn_golfer.getGolferName()
+            gts["tournament_name"] = tourn_golfer.getTournName()
+            gts["tourn_golfer_id"] = tourn_golfer.tg_id
+            scores = GolferRoundScores.objects.filter(
+                grs_tourn_golfer = tourn_golfer,
+                ).order_by('grs_round')
+
+            for i in range(1, len(scores) +1):
+                round_score = scores[i-1].grs_total_score
+                gts["round{}_score".format(i)] = round_score
+                total_score = total_score + round_score
+
+            gts["total_score"] = total_score
+            tournament_scores.append(gts)
+
+        return sorted
