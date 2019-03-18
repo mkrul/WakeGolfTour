@@ -5,5 +5,5 @@ urlpatterns = [
     url('', views.TournamentListView.as_view(),
         name='tournament_list'),
     url('<int:pk>/', views.TournamentDetailView.as_view(),
-        name='tournament_detail'),
+        name='tournament_detail')
 ]
