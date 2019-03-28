@@ -15,6 +15,8 @@ class GolfCourse(models.Model):
     def __str__(self):
         return self.course_name
 
+    #def getParList(self):
+
 
 class Hole(models.Model):
     hole_id = models.IntegerField(primary_key=True)

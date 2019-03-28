@@ -2,6 +2,7 @@ from django.db import models
 from tournament.models import Tournament, Round
 from golf_course.models import GolfCourse
 from operator import itemgetter
+import logging
 
 class Golfer(models.Model):
     golfer_id = models.IntegerField(primary_key=True)
@@ -95,11 +96,11 @@ class GolferRoundScores(models.Model):
             gts["total_score"] = total_score
             tournament_scores.append(gts)
 
-        return sorted
+        return sorted(tournament_scores, key=itemgetter('total_score'))
 
     def getTournScoresByGolfer(golfer_id):
         tournament_scores = list()
-        tourn_golfers = TournGolfer.objects.filter(tg_tourn = golfer_id)
+        tourn_golfers = TournGolfer.objects.filter(tg_golfer_id = golfer_id)
 
         for tourn_golfer in tourn_golfers:
             total_score = 0 
@@ -119,4 +120,4 @@ class GolferRoundScores(models.Model):
             gts["total_score"] = total_score
             tournament_scores.append(gts)
 
-        return sorted
+        return sorted(tournament_scores, key=itemgetter('total_score'))
