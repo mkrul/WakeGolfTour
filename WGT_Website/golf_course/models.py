@@ -15,8 +15,13 @@ class GolfCourse(models.Model):
     def __str__(self):
         return self.course_name
 
-    #def getParList(self):
-
+    def getParList(self):
+        # create a list of the pars for each hole in the course
+        holes = Hole.objects.filter(hole_course_id = self.course_id)
+        hole_par_values = []
+        for each in holes:
+            hole_par_values.append(each.hole_par)
+        return hole_par_values
 
 class Hole(models.Model):
     hole_id = models.IntegerField(primary_key=True)

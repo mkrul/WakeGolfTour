@@ -121,3 +121,17 @@ class GolferRoundScores(models.Model):
             tournament_scores.append(gts)
 
         return sorted(tournament_scores, key=itemgetter('total_score'))
+
+    def getParDiffs():
+        parList = self.grs_tourn_golfer.tg_tourn.tourn_course.getParList()
+        golfer_scores = []
+        
+        for each in range (0, 18):
+            score = getattr(self, 'grs_hole{}_score'.format(each+1))
+            parList.append(score)
+        
+        round_scores_diff = []
+        for each in range(0, 18):
+            hole_score_par_diff = []
+            
+        
