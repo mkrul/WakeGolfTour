@@ -12,7 +12,8 @@ class HoleInline (admin.TabularInline):
 
 class GolfCourseAdmin (admin.ModelAdmin):
     inlines = [HoleInline]
-    fieldsets = [(None, {'fields': ['course_name']}),]
+    fieldsets = [(None, {'fields': ['course_name']}),
+        ('Course Total Par', {'fields': ['course_total_par']}),]
     exclude = ['course_id']
     actions_on_top = False
 

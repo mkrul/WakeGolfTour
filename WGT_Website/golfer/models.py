@@ -8,9 +8,10 @@ class Golfer(models.Model):
     golfer_id = models.IntegerField(primary_key=True)
     golfer_name = models.TextField()
     golfer_birthdate = models.DateField()
+    golfer_city = models.TextField(default="unknown", blank=True)
 
     class Meta:
-        managed = False
+        managed = True 
         db_table = 'Golfer'
 
     def __str__(self):

@@ -24,7 +24,7 @@ class GolfCourse(models.Model):
         return hole_par_values
 
 class Hole(models.Model):
-    hole_id = models.IntegerField(primary_key=True)
+    hole_id = models.AutoField(primary_key=True)
     hole_course = models.ForeignKey(GolfCourse, models.DO_NOTHING)
     hole_number = models.IntegerField()
     hole_par = models.IntegerField()

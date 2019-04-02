@@ -7,8 +7,8 @@ from golfer import urls as golfer_urls
 from tournament import urls as tournament_urls
 
 urlpatterns = [
-    path(r'^$', homepage),
-    path(r'^admin/', admin.site.urls),
+    path(r'^', homepage),
+    path('admin/', admin.site.urls),
     path('golf_course/', include(golf_course_urls)),
     path('golfer/', include(golfer_urls)),
     path('tournament/', include (tournament_urls)),
