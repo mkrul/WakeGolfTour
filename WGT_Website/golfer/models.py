@@ -123,7 +123,7 @@ class GolferRoundScores(models.Model):
 
         return sorted(tournament_scores, key=itemgetter('total_score'))
 
-    def getParDiffs():
+    def getParDiffs(self):
         golfer_scores = []
         for each in range (0, 18):
             score = getattr(self, 'grs_hole{}_score'.format(each+1))
