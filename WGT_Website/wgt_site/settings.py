@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'golfer',
     'golf_course',
     'tournament',
+    'golfer_polls',
 ]
 
 MIDDLEWARE = [
