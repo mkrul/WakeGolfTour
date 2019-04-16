@@ -8,7 +8,7 @@ from tournament import urls as tournament_urls
 from golfer_polls import urls as golfer_polls_urls
 
 urlpatterns = [
-    path(r'^', homepage),
+    path('', homepage),
     path('admin/', admin.site.urls),
     path('golf_course/', include(golf_course_urls)),
     path('golfer/', include(golfer_urls)),
